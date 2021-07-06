@@ -6,11 +6,10 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.urls import path
 
-settings.configure(
-	ROOT_URLCONF = __name__,
-	DEBUG = True,
-	SECRET_KEY = 'secret'
-)
+ROOT_URLCONF = __name__
+DEBUG = True
+SECRET_KEY = 'secret'
+
 
 text = ''.join([this.d.get(i,i) for i in this.s])
 title, _, *quotes = text.split('\n')
