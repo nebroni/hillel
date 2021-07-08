@@ -15,27 +15,31 @@ DEBUG = True,
 SECRET_KEY = 'secret'
 )
 
-text = ''.join([this.d.get(i,i) for i in this.s])
-title, _, *quotes = text.split('\n')
 
-html_file = """
+list_of_modules = [i for i in dir(importlib.import_module(name='random')) if not i.startswith('_')]
+string_of_modules = '\n'.join([f'<a href="random/{i}">{i}</a><br>' for i in list_of_modules])
+
+
+
+html_file = f"""
 <!DOCTYPE html>
 <html>
 <head>
-<title>{title}</title>
+<title>Nebroni</title>
 </head>
 <body>
-<h1>{quote}</h1>
+{string_of_modules}
 <h2>@nebroni</h2>
 </body>
 </html>
 """
 
 def hello(_):
-	return HttpResponse(html_file.format(title = title, quote = random.choice(quotes)))
+	return HttpResponse(html_file)
 
 urlpatterns = [
-	path('',hello)
+
+	path('random', hello)
 ]
 
 execute_from_command_line(sys.argv)
