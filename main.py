@@ -40,8 +40,7 @@ def doc_of_function(_, name_of_module, name):
 
 
 urlpatterns = [
-	path('', HttpResponse("You Found Second Easter Egg congratulation!!!")),
-	path('/doc', easter_egg),
+	path('doc', easter_egg),
 	path('doc/<name_of_module>', header),
 	path('doc/<name_of_module>/<name>', doc_of_function)
 ]
