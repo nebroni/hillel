@@ -44,5 +44,5 @@ urlpatterns = [
 	path('doc/<name_of_module>', header),
 	path('doc/<name_of_module>/<name>', doc_of_function)
 ]
-
-execute_from_command_line(sys.argv)
+if __name__ == '__main__':
+	execute_from_command_line(sys.argv)
