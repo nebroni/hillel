@@ -1,0 +1,10 @@
+{% extends "layout.html"%}
+{% block title %} Nebroni{% endblock %}
+{% block content %}
+{% for i in string %}
+<p>{{ i }}</p>
+{%empty%}
+NO quotes
+{% endfor %}
+<h2>@nebroni</h2>
+{% endblock %}
