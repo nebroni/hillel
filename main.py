@@ -1,5 +1,6 @@
 import importlib
 from password import password as p
+from django.conf import settings
 from django.core.management import execute_from_command_line
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -12,7 +13,16 @@ TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
 		'DIRS': ['C:\\Users\\User\\PycharmProjects\\hillel1\\html'],
-	}
+		'APP_DIRS': True,
+		'OPTIONS': {
+			'context_processors': [
+				'django.template.context_processors.debug',
+				'django.template.context_processors.request',
+				'django.contrib.auth.context_processors.auth',
+				'django.contrib.messages.context_processors.messages',
+			],
+		},
+	},
 ]
 
 
