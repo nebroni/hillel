@@ -39,12 +39,12 @@ dict1 = {}
 
 def search(request):
 	url = request.POST.get('req','')
-	massage = 'Invalid URL . Allowed schemes: http,ftp,https'
+	massage = 'Invalid URL. Allowed schemes: http,ftp,https'
 	short_url = p()
 	if url.startswith(('http://','https://','ftp://')):
 		dict1[short_url] = url
 		massage = short_url
-	return render(request, 'zen.html', {'message': massage, 'check': len(massage)})
+	return render(request, 'zen.html', {'message': massage * bool(url), 'check': len(massage)})
 
 def redirect(request, key):
 	return HttpResponseRedirect(dict1[key])
