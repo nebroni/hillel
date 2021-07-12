@@ -2,7 +2,7 @@
 {% block title %} Nebroni{% endblock %}
 {% block content %}
 {% for i in string %}
-<p><a href="random/{{i}}">{{ i }}</a></p>
+<p><a href="{{name_of_module}}/{{i}}">{{ i }}</a></p>
 {%empty%}
 NO quotes
 {% endfor %}

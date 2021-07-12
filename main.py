@@ -1,5 +1,5 @@
 import importlib
-import sys
+from password import password as p
 from django.conf import settings
 from django.core.management import execute_from_command_line
 from django.http import HttpResponse, HttpResponseRedirect
@@ -26,7 +26,7 @@ def easter_egg(_):
 def header(request, name_of_module):
 	try:
 		list_of_modules = [i for i in dir(importlib.import_module(name=f'{name_of_module}')) if not i.startswith('_')]
-		return render(request, 'index.html', {'string': list_of_modules})
+		return render(request, 'index.html', {'string': list_of_modules, 'name_of_module':name_of_module})
 	except ModuleNotFoundError:
 		return HttpResponse(f"No module named '{name_of_module}'")
 
@@ -46,7 +46,7 @@ def search(request):
 		massage = short_url
 	return render(request, 'zen.html', {'message': massage, 'check': len(massage)})
 
-def redirect(request,key):
+def redirect(request, key):
 	return HttpResponseRedirect(dict1[key])
 
 
@@ -59,4 +59,4 @@ urlpatterns = [
 	path('doc/<name_of_module>/<name>', doc_of_function)
 ]
 if __name__ == '__main__':
-	execute_from_command_line(sys.argv)
+	execute_from_command_line()
