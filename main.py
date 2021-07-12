@@ -1,29 +1,23 @@
 import importlib
 from password import password as p
-from django.conf import settings
 from django.core.management import execute_from_command_line
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import path
-settings.configure(
-	ROOT_URLCONF=__name__,
-	DEBUG=True,
-	SECRET_KEY='secret',
-	TEMPLATES=[
-		{
-			'BACKEND': 'django.template.backends.django.DjangoTemplates',
-			'DIRS': [''],
-		}
-	]
-)
 
+
+ROOT_URLCONF=__name__
+DEBUG=True
+SECRET_KEY='secret'
+TEMPLATES=[
+	{
+		'BACKEND': 'django.template.backends.django.DjangoTemplates',
+		'DIRS': [''],
+	}
+]
 
 
 # 1
-def easter_egg(request):
-	return render(request,'')
-
-
 def header(request, name_of_module):
 	try:
 		list_of_modules = [i for i in dir(importlib.import_module(name=f'{name_of_module}')) if not i.startswith('_')]
@@ -48,14 +42,15 @@ def search(request):
 	return render(request, 'zen.html', {'message': massage * bool(url), 'check': len(massage)})
 
 def redirect(request, key):
+	if key == 'doc':
+		return HttpResponse('You found easter egg)')
 	return HttpResponseRedirect(dict1[key])
 
 
 
 urlpatterns = [
 	path('', search),
-	path('doc', easter_egg),
-	#path('<key>', redirect),
+	path('<key>', redirect),
 	path('doc/<name_of_module>', header),
 	path('doc/<name_of_module>/<name>', doc_of_function)
 ]
