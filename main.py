@@ -2,7 +2,7 @@ import importlib
 import sys
 from django.conf import settings
 from django.core.management import execute_from_command_line
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import path
 settings.configure(
@@ -35,12 +35,25 @@ def doc_of_function(_, name_of_module, name):
 	return HttpResponse(getattr(importlib.import_module(name=f'{name_of_module}'), name).__doc__)
 
 # 2
+dict1 = {}
+
+def search(request):
+	url = request.POST.get('req','')
+	massage = 'Invalid URL . Allowed schemes: http,ftp,https'
+	short_url = p()
+	if url.startswith(('http://','https://','ftp://')):
+		dict1[short_url] = url
+		massage = short_url
+	return render(request, 'zen.html', {'message': massage, 'check': len(massage)})
+
+def redirect(request,key):
+	return HttpResponseRedirect(dict1[key])
 
 
 
 urlpatterns = [
-	path(''),
-	path('<key>'),
+	path('', search),
+	path('<key>', redirect),
 	path('doc', easter_egg),
 	path('doc/<name_of_module>', header),
 	path('doc/<name_of_module>/<name>', doc_of_function)
