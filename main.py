@@ -1,22 +1,20 @@
 import importlib
 from password import password as p
-from django.conf import settings
 from django.core.management import execute_from_command_line
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import path
 
-settings.configure(
-	ROOT_URLCONF=__name__,
-	DEBUG=True,
-	SECRET_KEY='secret',
-	TEMPLATES=[
-		{
-			'BACKEND': 'django.template.backends.django.DjangoTemplates',
-			'DIRS': ['html'],
-		},
-	]
-)
+
+ROOT_URLCONF=__name__,
+DEBUG=True,
+SECRET_KEY='secret',
+TEMPLATES=[
+	{
+		'BACKEND': 'django.template.backends.django.DjangoTemplates',
+		'DIRS': ['html'],
+	},
+]
 
 
 # 1
