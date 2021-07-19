@@ -1,20 +1,22 @@
 import importlib
 from password import password as p
+from django.conf import settings
 from django.core.management import execute_from_command_line
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import path
 
-
-ROOT_URLCONF=__name__
-DEBUG=True
-SECRET_KEY='secret'
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [''],
-    },
-]
+settings.configure(
+	ROOT_URLCONF=__name__,
+	DEBUG=True,
+	SECRET_KEY='secret',
+	TEMPLATES=[
+		{
+			'BACKEND': 'django.template.backends.django.DjangoTemplates',
+			'DIRS': ['html'],
+		},
+	]
+)
 
 
 # 1
@@ -44,7 +46,10 @@ def search(request):
 def redirect(request, key):
 	if key == 'doc':
 		return HttpResponse('You found easter egg)')
-	return HttpResponseRedirect(dict1[key])
+	if dict1.get(key, ''):
+		return HttpResponseRedirect(dict1[key])
+	else:
+		return HttpResponseRedirect('/')
 
 
 
