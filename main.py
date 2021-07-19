@@ -11,7 +11,7 @@ SECRET_KEY = 'secret'
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': ['html'],
+		'DIRS': ['C:\\Users\\User\\PycharmProjects\\hillel1\\html'],
 	},
 ]
 
