@@ -27,11 +27,9 @@ DATABASES = {
 
 
 # CREATE TABLE
-def create_table():
-	command_create = 'create table if not exists table_key (key char(5), link text)'
-	with connection.cursor() as cur:
-		cur.execute(command_create)
-		print(f'create', cur.rowcount)
+command_create = 'create table if not exists table_key (key char(5), link text)'
+with connection.cursor() as cur:
+	cur.execute(command_create)
 
 
 # INSERT TABLE
