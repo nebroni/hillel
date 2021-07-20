@@ -1,7 +1,6 @@
 import importlib
 from password import password as p
 from django.core.management import execute_from_command_line
-from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import path
@@ -87,15 +86,12 @@ def redirect(_, key):
 			return HttpResponseRedirect('/')
 
 
-with connection.cursor() as cur:
-	for i in cur.execute('select * from table_key;'):
-		print(i)
-
 urlpatterns = [
 	path('', search),
 	path('<key>', redirect),
 	path('doc/<name_of_module>', header),
 	path('doc/<name_of_module>/<name>', doc_of_function)
 ]
+
 if __name__ == '__main__':
 	execute_from_command_line()
